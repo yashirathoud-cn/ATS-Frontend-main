@@ -1,0 +1,24 @@
+@import "tailwindcss";
+:root {
+  /* Colors */
+  --color-bg: #black;
+  /* --color-text-light: white; */
+ 
+  /* Fonts */
+ 
+ 
+  /* General Styling */
+  font-family: var(--font-primary);
+  color: var(--color-text-light);
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+}
+ 
+/* .ancizar-serif-300 {
+  font-family: "Ancizar Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+ 
+ 

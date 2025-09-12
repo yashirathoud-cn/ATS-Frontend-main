@@ -1,0 +1,308 @@
+.container {
+  --color: #239ce2;
+  width: 210mm; /* A4 width for print and PDF */
+  max-width: 850px; /* Fallback for screen */
+  margin: 0 auto;
+  flex: 1.2;
+  height: fit-content;
+  min-height: 297mm; /* A4 height for single-page resumes */
+  box-shadow: 1px 1px 3px 2px white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Reduced for tighter layout */
+  padding: 15mm; /* Standard A4 margin */
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.header .heading {
+  font-size: 2.7rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.header .subHeading {
+  color: var(--color);
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.header .links {
+  margin-top: 15px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.header .link {
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none; /* Clean look in print */
+  line-height: 1.2; /* Consistent text height */
+}
+
+.main {
+  display: flex;
+  gap: 30px;
+}
+
+.col1 {
+  flex: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.col2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section .sectionTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
+  /* border-bottom: 2px solid #000; */
+  margin-bottom: 5px;
+}
+
+.section .content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.section .content .item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 10px;
+  page-break-inside: avoid; /* Prevent splitting in print */
+  align-items: flex-start; /* Ensure left alignment */
+}
+
+.content .title {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.3rem;
+}
+
+.content .subTitle {
+  font-weight: bold;
+  color: var(--color);
+  font-size: 1rem;
+}
+
+.content .overview {
+  font-size: 0.875rem;
+}
+
+.content .link {
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--color);
+  text-decoration: none;
+  line-height: 1.2; /* Consistent text height */
+}
+
+.content .date {
+  font-size: 0.875rem;
+  line-height: 1.2; /* Consistent text height */
+}
+
+.content .points {
+  padding-left: 18px;
+  font-size: 0.875rem;
+  list-style-type: disc; /* Use bullets for all lists */
+}
+
+.hidden {
+  display: none;
+}
+
+/* Media queries for responsive design */
+
+/* Tablet screens */
+@media screen and (max-width: 968px) {
+  .container {
+    padding: 20px;
+    max-width: 100%; /* Full width on tablets */
+  }
+
+  .header .heading {
+    font-size: 2.2rem;
+  }
+
+  .main {
+    gap: 20px;
+  }
+}
+
+/* Small tablets */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 15px;
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header .heading {
+    font-size: 2rem;
+  }
+
+  .header .subHeading {
+    font-size: 1rem;
+  }
+
+  .header .links {
+    gap: 20px;
+  }
+
+  .main {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .col1,
+  .col2 {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+/* Mobile screens */
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 12px;
+    gap: 15px;
+    min-height: auto;
+  }
+
+  .header .heading {
+    font-size: 1.8rem;
+  }
+
+  .header .subHeading {
+    font-size: 0.9rem;
+  }
+
+  .header .links {
+    gap: 15px;
+  }
+
+  .section .sectionTitle {
+    font-size: 1.2rem;
+  }
+
+  .content .title,
+  .content .subTitle {
+    font-size: 0.95rem;
+  }
+
+  .content .overview,
+  .content .points {
+    font-size: 0.85rem;
+  }
+}
+
+/* Very small screens */
+@media screen and (max-width: 320px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header .heading {
+    font-size: 1.5rem;
+  }
+
+  .header .links {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* Print-specific styles */
+@media print {
+  .container {
+    width: 210mm;
+    min-height: 297mm;
+    height: auto;
+    margin: 0;
+    padding: 15mm;
+    box-shadow: none;
+    background-color: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .main {
+    gap: 15px;
+    display: flex !important; /* Force flexbox for PDF */
+  }
+
+  .col1,
+  .col2 {
+    gap: 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    width: auto; /* Reset width for print */
+  }
+
+  .section .content .item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    page-break-inside: avoid;
+  }
+
+  .header .link,
+  .content .link,
+  .content .date {
+    line-height: 1.2 !important;
+  }
+
+  .header .heading {
+    font-size: 2.2rem;
+  }
+
+  .header .subHeading {
+    font-size: 0.9375rem;
+  }
+
+  .section .sectionTitle {
+    font-size: 1.1rem;
+  }
+
+  .content .title,
+  .content .subTitle {
+    font-size: 0.875rem;
+  }
+
+  .content .overview,
+  .content .date,
+  .content .points {
+    font-size: 0.75rem;
+  }
+
+  .header .link,
+  .content .link {
+    font-size: 0.7rem;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}

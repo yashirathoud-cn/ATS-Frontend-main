@@ -1,0 +1,47 @@
+name: Deploy ATS Frontend to Docker Hub
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Push Image to Docker Hub
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ats-frontend:latest .
+
+    - name: Push Docker image to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ats-frontend:latest
+
+    - name: Deploy to EC2
+      run: |
+        echo "${{ secrets.SSHKEY }}" > ats-frontend.pem
+        chmod 600 ats-frontend.pem
+        
+        ssh -o StrictHostKeyChecking=no -i "ats-frontend.pem" ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+          docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
+
+          # Stop and remove the existing container
+          docker stop ats-frontend || true
+          docker rm ats-frontend || true
+
+          # Pull the latest image
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ats-frontend:latest
+
+          # Run the container with the latest image
+          docker run -d --name ats-frontend -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/ats-frontend:latest
+
+          # Remove old images (excluding the latest one)
+          docker image prune -f
+        EOF

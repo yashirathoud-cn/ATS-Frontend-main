@@ -1,0 +1,12 @@
+TemplateCard.css
+
+.card-hover:hover .hidden-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .hidden-content {
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }

@@ -1,0 +1,45 @@
+/* Premium.module.css */
+.bgGray900 {
+  background-color: #161718 !important;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.shadowLg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.278),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Add hover effects for cards */
+.bgGray900:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px -5px rgb(0, 47, 255);
+}
+
+/* Ensure images maintain proper dimensions */
+.bgGray900 img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .gap-20 {
+    gap: 1rem; /* Adjust gap for smaller screens */
+  }
+
+  .px-8 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .py-10 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Ensure two cards are displayed in tablet view */
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr); /* Ensure two columns */
+  }
+}

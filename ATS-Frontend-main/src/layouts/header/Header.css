@@ -1,0 +1,43 @@
+header {
+  font-family: var(--font-primary); /* Modern, clean font */
+}
+
+.custom-desktop\:hidden {
+  display: block;
+}
+
+/* Default: Hide desktop menu */
+.custom-desktop\:flex {
+  display: none;
+}
+
+@media (min-width: 665px) and (max-width: 1020px) {
+  .custom-desktop\:hidden {
+    display: block; /* Show hamburger menu */
+  }
+  .custom-desktop\:flex {
+    display: none; /* Hide desktop menu */
+  }
+}
+
+/* Above 1020px: Show desktop menu, hide hamburger menu */
+@media (min-width: 1021px) {
+  .custom-desktop\:hidden {
+    display: none; /* Hide hamburger menu */
+  }
+  .custom-desktop\:flex {
+    display: flex; /* Show desktop menu */
+  }
+}
+
+/* Optional: Ensure submenu is hidden in mobile view */
+@media (max-width: 1020px) {
+  .group .submenu {
+    display: none; /* Keep this if needed for edge cases */
+  }
+}
+
+/* Mobile submenu styling */
+.mobile-submenu {
+  transition: all 0.3s ease-in-out;
+}
